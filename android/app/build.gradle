@@ -22,6 +22,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Install the diagnostic build alongside the official Android application.
+            applicationIdSuffix ".diagnostic"
+            versionNameSuffix "-diagnostic"
+        }
         release {
             minifyEnabled = true
             shrinkResources = true
