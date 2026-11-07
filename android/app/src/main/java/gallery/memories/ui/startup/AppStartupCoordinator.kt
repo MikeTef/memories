@@ -111,8 +111,9 @@ class AppStartupCoordinator(
         local.configure(AssetCache.originOf(base), webRoot, dir, AssetCache.appsPathOf(describe))
         activity.binding.webview.clearHistory()
         activity.clearHistoryOnLoad = true
-        val url = if (subpath.isEmpty()) local.origin() + "$webRoot/"
-        else local.origin() + "$webRoot/index.php/apps/memories/$subpath"
+        // Always enter through the Memories route base. The webroot entry (e.g. /nextcloud/)
+        // makes Vue Router see /nextcloud/ with no matched route, leaving a blank screen.
+        val url = local.origin() + "$webRoot/index.php/apps/memories/" + subpath
         activity.binding.webview.loadUrl(url)
         return true
     }
